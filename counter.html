@@ -17,7 +17,6 @@
     --out: #f5a0a0;
     --warn: #f5d070;
     --danger: #ff4040;
-    --limit: 200;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,7 +34,6 @@
     overflow: hidden;
   }
 
-  /* Subtle grid background */
   body::before {
     content: '';
     position: fixed;
@@ -82,7 +80,6 @@
   .status-dot.live { background: var(--in); box-shadow: 0 0 8px var(--in); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
 
-  /* Main count display */
   .count-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -105,8 +102,8 @@
 
   .count-card.warning { border-color: #5a4a00; background: #141200; }
   .count-card.warning::after { background: var(--warn); }
-  .count-card.danger { border-color: #5a0000; background: #130000; animation: shake .4s; }
-  .count-card.danger::after { background: var(--danger); }
+  .count-card.danger  { border-color: #5a0000; background: #130000; animation: shake .4s; }
+  .count-card.danger::after  { background: var(--danger); }
 
   @keyframes shake {
     0%,100%{transform:translateX(0)}
@@ -129,16 +126,13 @@
     line-height: 1;
     letter-spacing: -.02em;
     color: var(--text);
-    transition: color .3s, transform .1s;
+    transition: color .3s;
   }
 
-  .count-number.pop {
-    animation: pop .15s ease-out;
-  }
+  .count-number.pop { animation: pop .15s ease-out; }
   @keyframes pop { 0%{transform:scale(1.08)} 100%{transform:scale(1)} }
-
   .count-number.warning { color: var(--warn); }
-  .count-number.danger { color: var(--danger); }
+  .count-number.danger  { color: var(--danger); }
 
   .limit-bar-wrap {
     margin-top: 20px;
@@ -163,24 +157,22 @@
     font-size: 11px;
     color: var(--muted);
   }
-
   .limit-info span:last-child { color: var(--text); }
 
-  /* Alert banner */
   .alert {
     background: #1a0000;
     border: 1px solid #5a0000;
     border-radius: 4px;
-    padding: 12px 16px;
-    font-size: 13px;
+    padding: 16px;
+    font-size: 15px;
     color: var(--danger);
-    letter-spacing: .05em;
+    letter-spacing: .08em;
     text-align: center;
     display: none;
+    font-weight: 500;
   }
   .alert.visible { display: block; }
 
-  /* Buttons */
   .buttons {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -196,13 +188,10 @@
     font-size: 13px;
     letter-spacing: .1em;
     text-transform: uppercase;
-    position: relative;
-    overflow: hidden;
     -webkit-tap-highlight-color: transparent;
     transition: transform .1s, opacity .1s;
     user-select: none;
   }
-
   .btn:active { transform: scale(.96); opacity: .85; }
 
   .btn-inner {
@@ -214,24 +203,10 @@
     padding: 28px 16px;
   }
 
-  .btn-icon {
-    font-size: 32px;
-    line-height: 1;
-  }
+  .btn-icon { font-size: 32px; line-height: 1; }
+  .btn-in  { background: #0d1f09; border: 1px solid #2a5020; color: var(--in); }
+  .btn-out { background: #1f0909; border: 1px solid #502020; color: var(--out); }
 
-  .btn-in {
-    background: #0d1f09;
-    border: 1px solid #2a5020;
-    color: var(--in);
-  }
-
-  .btn-out {
-    background: #1f0909;
-    border: 1px solid #502020;
-    color: var(--out);
-  }
-
-  /* Stats row */
   .stats {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -252,8 +227,7 @@
     font-weight: 700;
     color: var(--text);
   }
-
-  .stat-val.in { color: var(--in); }
+  .stat-val.in  { color: var(--in); }
   .stat-val.out { color: var(--out); }
 
   .stat-label {
@@ -263,201 +237,17 @@
     text-transform: uppercase;
     margin-top: 2px;
   }
-
-  /* Reset */
-  .reset-wrap {
-    text-align: center;
-  }
-
-  .btn-reset {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    padding: 8px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: border-color .2s, color .2s;
-  }
-
-  .btn-reset:hover { border-color: var(--danger); color: var(--danger); }
-
-  /* Firebase config overlay */
-  .config-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.92);
-    backdrop-filter: blur(8px);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-
-  .config-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 32px;
-    width: 100%;
-    max-width: 480px;
-  }
-
-  .config-box h2 {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
-
-  .config-box p {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-
-  .config-box p a {
-    color: var(--text);
-    text-decoration: underline;
-  }
-
-  .field {
-    margin-bottom: 12px;
-  }
-
-  .field label {
-    display: block;
-    font-size: 10px;
-    letter-spacing: .15em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .field input {
-    width: 100%;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 10px 12px;
-    color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    outline: none;
-    transition: border-color .2s;
-  }
-
-  .field input:focus { border-color: #555; }
-
-  .config-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 20px;
-  }
-
-  .btn-save {
-    flex: 1;
-    background: var(--text);
-    color: var(--bg);
-    border: none;
-    border-radius: 4px;
-    padding: 12px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-weight: 500;
-  }
-
-  .btn-demo {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    border-radius: 4px;
-    padding: 12px 16px;
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-
-  .config-error {
-    font-size: 11px;
-    color: var(--danger);
-    margin-top: 8px;
-    display: none;
-  }
-  .config-error.visible { display: block; }
-
-  .limit-row {
-    display: flex;
-    gap: 8px;
-    align-items: flex-end;
-  }
-  .limit-row .field { flex: 1; margin-bottom: 0; }
 </style>
 </head>
 <body>
 
-<!-- Firebase Config Overlay -->
-<div class="config-overlay" id="configOverlay">
-  <div class="config-box">
-    <h2>Firebase Setup</h2>
-    <p>
-      Geh zu <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a>,
-      erstelle ein Projekt → Realtime Database → Datenbank-URL kopieren.<br><br>
-      Unter Projekteinstellungen → Deine Apps → Web-App → Config findest du alle Felder.
-    </p>
-
-    <div class="field">
-      <label>API Key</label>
-      <input type="text" id="cfg-apiKey" placeholder="AIzaSy...">
-    </div>
-    <div class="field">
-      <label>Auth Domain</label>
-      <input type="text" id="cfg-authDomain" placeholder="mein-projekt.firebaseapp.com">
-    </div>
-    <div class="field">
-      <label>Database URL</label>
-      <input type="text" id="cfg-dbUrl" placeholder="https://mein-projekt-default-rtdb.firebaseio.com">
-    </div>
-    <div class="field">
-      <label>Project ID</label>
-      <input type="text" id="cfg-projectId" placeholder="mein-projekt">
-    </div>
-    <div class="field">
-      <label>App ID</label>
-      <input type="text" id="cfg-appId" placeholder="1:123456:web:abc...">
-    </div>
-    <div class="field">
-      <label>Max. Besucher (Limit)</label>
-      <input type="number" id="cfg-limit" placeholder="200" value="200" min="1">
-    </div>
-
-    <div class="config-error" id="configError">Bitte alle Felder ausfüllen.</div>
-
-    <div class="config-actions">
-      <button class="btn-save" onclick="saveConfig()">Verbinden</button>
-      <button class="btn-demo" onclick="demoMode()">Demo-Modus</button>
-    </div>
-  </div>
-</div>
-
-<!-- Main App -->
 <div class="wrapper">
   <header>
     <div class="label">
       <span class="status-dot" id="statusDot"></span>
       <span id="statusText">Verbinde...</span>
     </div>
-    <div class="label" id="sessionLabel">—</div>
+    <div class="label" id="timeLabel">—</div>
   </header>
 
   <div class="count-card" id="countCard">
@@ -467,21 +257,21 @@
       <div class="limit-bar" id="limitBar"></div>
     </div>
     <div class="limit-info">
-      <span id="limitLabel">Limit: 200</span>
-      <span id="remainingLabel">200 frei</span>
+      <span id="limitLabel">Limit: —</span>
+      <span id="remainingLabel">— frei</span>
     </div>
   </div>
 
   <div class="alert" id="alertBanner">⚠ LIMIT ERREICHT — Einlass stoppen!</div>
 
   <div class="buttons">
-    <button class="btn btn-in" onclick="change(1)" id="btnIn">
+    <button class="btn btn-in" onclick="change(1)">
       <div class="btn-inner">
         <span class="btn-icon">↑</span>
         <span>Rein</span>
       </div>
     </button>
-    <button class="btn btn-out" onclick="change(-1)" id="btnOut">
+    <button class="btn btn-out" onclick="change(-1)">
       <div class="btn-inner">
         <span class="btn-icon">↓</span>
         <span>Raus</span>
@@ -503,145 +293,83 @@
       <div class="stat-label">Peak</div>
     </div>
   </div>
-
-  <div class="reset-wrap">
-    <button class="btn-reset" onclick="confirmReset()">Zähler zurücksetzen</button>
-  </div>
 </div>
 
 <script type="module">
-// ─── Firebase ───────────────────────────────────────────────────────────────
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-import { getDatabase, ref, onValue, runTransaction, set }
+import { getDatabase, ref, onValue, runTransaction }
   from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
 
-// ─── State ──────────────────────────────────────────────────────────────────
-let db = null;
-let counterRef = null;
+const firebaseConfig = {
+  apiKey:            "AIzaSyASCut5_OckQ4MXASTZMmctf3zXqQKwmfw",
+  authDomain:        "door-counter-77820.firebaseapp.com",
+  databaseURL:       "https://door-counter-77820-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:         "door-counter-77820",
+  storageBucket:     "door-counter-77820.firebasestorage.app",
+  messagingSenderId: "910578058610",
+  appId:             "1:910578058610:web:afd083bb956713d890c9eb"
+};
+
+const app        = initializeApp(firebaseConfig);
+const db         = getDatabase(app);
+const counterRef = ref(db, 'counter');
+const settingsRef= ref(db, 'settings');
+
 let LIMIT = 200;
-let isDemo = false;
 
-let demoState = { count: 0, totalIn: 0, totalOut: 0, peak: 0 };
-
-// ─── Config / Init ──────────────────────────────────────────────────────────
-window.saveConfig = function() {
-  const apiKey     = document.getElementById('cfg-apiKey').value.trim();
-  const authDomain = document.getElementById('cfg-authDomain').value.trim();
-  const dbUrl      = document.getElementById('cfg-dbUrl').value.trim();
-  const projectId  = document.getElementById('cfg-projectId').value.trim();
-  const appId      = document.getElementById('cfg-appId').value.trim();
-  const limitVal   = parseInt(document.getElementById('cfg-limit').value) || 200;
-  const err        = document.getElementById('configError');
-
-  if (!apiKey || !authDomain || !dbUrl || !projectId || !appId) {
-    err.classList.add('visible');
-    return;
+// Listen to settings (limit)
+onValue(settingsRef, (snap) => {
+  const s = snap.val();
+  if (s && s.limit) {
+    LIMIT = s.limit;
+    document.getElementById('limitLabel').textContent = `Limit: ${LIMIT}`;
   }
-  err.classList.remove('visible');
+});
 
-  LIMIT = limitVal;
-  document.getElementById('limitLabel').textContent = `Limit: ${LIMIT}`;
+// Listen to counter
+onValue(counterRef, (snap) => {
+  const d = snap.val() || { count: 0, totalIn: 0, totalOut: 0, peak: 0 };
+  updateUI(d.count, d.totalIn, d.totalOut, d.peak);
+  setStatus(true, 'Live');
+  document.getElementById('timeLabel').textContent =
+    new Date().toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+}, () => setStatus(false, 'Verbindungsfehler'));
 
-  // Save to localStorage for reload convenience
-  localStorage.setItem('fbConfig', JSON.stringify({ apiKey, authDomain, dbUrl, projectId, appId, limit: LIMIT }));
-
-  initFirebase({ apiKey, authDomain, databaseURL: dbUrl, projectId, appId });
-};
-
-window.demoMode = function() {
-  isDemo = true;
-  LIMIT = parseInt(document.getElementById('cfg-limit').value) || 200;
-  document.getElementById('limitLabel').textContent = `Limit: ${LIMIT}`;
-  document.getElementById('configOverlay').style.display = 'none';
-  setStatus(true, 'Demo-Modus');
-  updateUI(demoState.count, demoState.totalIn, demoState.totalOut, demoState.peak);
-};
-
-function initFirebase(config) {
-  try {
-    const app = initializeApp(config);
-    db = getDatabase(app);
-    counterRef = ref(db, 'counter');
-
-    // Listen to changes
-    onValue(counterRef, (snap) => {
-      const data = snap.val() || { count: 0, totalIn: 0, totalOut: 0, peak: 0 };
-      updateUI(data.count, data.totalIn, data.totalOut, data.peak);
-    }, (err) => {
-      setStatus(false, 'Verbindungsfehler');
-    });
-
-    setStatus(true, 'Live');
-    document.getElementById('configOverlay').style.display = 'none';
-  } catch(e) {
-    document.getElementById('configError').textContent = 'Firebase-Fehler: ' + e.message;
-    document.getElementById('configError').classList.add('visible');
-  }
-}
-
-// ─── Counter logic ───────────────────────────────────────────────────────────
 window.change = function(delta) {
-  if (isDemo) {
-    demoState.count = Math.max(0, demoState.count + delta);
-    if (delta > 0) demoState.totalIn += delta;
-    if (delta < 0) demoState.totalOut += Math.abs(delta);
-    demoState.peak = Math.max(demoState.peak, demoState.count);
-    updateUI(demoState.count, demoState.totalIn, demoState.totalOut, demoState.peak);
-    return;
-  }
-
-  if (!counterRef) return;
-
   runTransaction(counterRef, (current) => {
     if (!current) current = { count: 0, totalIn: 0, totalOut: 0, peak: 0 };
     const newCount = Math.max(0, (current.count || 0) + delta);
     return {
-      count:   newCount,
+      count:    newCount,
       totalIn:  (current.totalIn  || 0) + (delta > 0 ? delta : 0),
       totalOut: (current.totalOut || 0) + (delta < 0 ? Math.abs(delta) : 0),
-      peak:    Math.max(current.peak || 0, newCount),
+      peak:     Math.max(current.peak || 0, newCount),
     };
   });
 };
 
-window.confirmReset = function() {
-  if (!confirm('Zähler wirklich auf 0 zurücksetzen?')) return;
-
-  if (isDemo) {
-    demoState = { count: 0, totalIn: 0, totalOut: 0, peak: 0 };
-    updateUI(0, 0, 0, 0);
-    return;
-  }
-
-  if (!counterRef) return;
-  set(counterRef, { count: 0, totalIn: 0, totalOut: 0, peak: 0 });
-};
-
-// ─── UI ──────────────────────────────────────────────────────────────────────
 function updateUI(count, totalIn, totalOut, peak) {
   const card    = document.getElementById('countCard');
   const display = document.getElementById('countDisplay');
   const bar     = document.getElementById('limitBar');
   const alert   = document.getElementById('alertBanner');
-  const remaining = Math.max(0, LIMIT - count);
-  const pct     = Math.min(100, (count / LIMIT) * 100);
 
-  document.getElementById('countDisplay').textContent = count;
-  document.getElementById('statIn').textContent  = totalIn;
-  document.getElementById('statOut').textContent = totalOut;
+  const remaining = Math.max(0, LIMIT - count);
+  const pct       = Math.min(100, (count / LIMIT) * 100);
+
+  display.textContent = count;
+  document.getElementById('statIn').textContent   = totalIn;
+  document.getElementById('statOut').textContent  = totalOut;
   document.getElementById('statPeak').textContent = peak;
   document.getElementById('remainingLabel').textContent = `${remaining} frei`;
-
   bar.style.width = pct + '%';
 
-  // Pop animation
   display.classList.remove('pop');
   void display.offsetWidth;
   display.classList.add('pop');
 
-  // States
-  card.classList.remove('warning','danger');
-  display.classList.remove('warning','danger');
+  card.classList.remove('warning', 'danger');
+  display.classList.remove('warning', 'danger');
   alert.classList.remove('visible');
   bar.style.background = 'var(--in)';
 
@@ -655,30 +383,11 @@ function updateUI(count, totalIn, totalOut, peak) {
     display.classList.add('warning');
     bar.style.background = 'var(--warn)';
   }
-
-  // Session label
-  const now = new Date();
-  document.getElementById('sessionLabel').textContent =
-    now.toLocaleTimeString('de-DE', { hour:'2-digit', minute:'2-digit' });
 }
 
 function setStatus(live, text) {
   document.getElementById('statusDot').className = 'status-dot' + (live ? ' live' : '');
   document.getElementById('statusText').textContent = text;
-}
-
-// ─── Auto-load saved config ──────────────────────────────────────────────────
-const saved = localStorage.getItem('fbConfig');
-if (saved) {
-  try {
-    const cfg = JSON.parse(saved);
-    document.getElementById('cfg-apiKey').value    = cfg.apiKey    || '';
-    document.getElementById('cfg-authDomain').value= cfg.authDomain|| '';
-    document.getElementById('cfg-dbUrl').value     = cfg.dbUrl || cfg.databaseURL || '';
-    document.getElementById('cfg-projectId').value = cfg.projectId || '';
-    document.getElementById('cfg-appId').value     = cfg.appId     || '';
-    document.getElementById('cfg-limit').value     = cfg.limit     || 200;
-  } catch(e) {}
 }
 </script>
 </body>
